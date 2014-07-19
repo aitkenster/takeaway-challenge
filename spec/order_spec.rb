@@ -24,4 +24,18 @@ describe Order do
 		expect(nicola.order_total).to eq 11.9
 	end
 
+	it 'sends an order delivery message if the users payment is the same as the order total' do 
+		nicola.order_total = 1
+		test_message = "Your order is ready"
+		nicola.verify_payment(1)
+		expect(nicola.delivery_message).to eq test_message
+	end
+
+		it 'does not send an order delivery message if the users payment is not the same as the order total' do 
+		nicola.order_total = 2
+		test_message = "Your order is ready"
+		nicola.verify_payment(1)
+		expect(nicola.delivery_message).not_to eq test_message
+	end
+
 end
