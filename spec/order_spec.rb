@@ -26,16 +26,14 @@ describe Order do
 
 	it 'sends an order delivery message if the users payment is the same as the order total' do 
 		nicola.order_total = 1
-		test_message = "Your order is ready"
+		test_message = (Time.now+3600).strftime("Thanks for ordering with WildMenu. Your order has been processed and will be delivered at %I:%M%p")
 		nicola.verify_payment(1)
 		expect(nicola.delivery_message).to eq test_message
 	end
 
-		it 'does not send an order delivery message if the users payment is not the same as the order total' do 
+	it 'does not send an order delivery message if the users payment is not the same as the order total' do 
 		nicola.order_total = 2
-		test_message = "Your order is ready"
-		nicola.verify_payment(1)
-		expect(nicola.delivery_message).not_to eq test_message
+		expect{nicola.verify_payment(1)}.to raise_error(RuntimeError)
 	end
 
 end
