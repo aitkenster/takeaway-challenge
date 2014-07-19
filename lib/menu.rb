@@ -10,3 +10,16 @@ class Menu
 		@list << {item => price}
 	end
 end
+
+class WildMenu < Menu
+
+	def initialize()
+		@list = [{"meerkat ragout" => 7.50},{"cheetah burger" => 5.95},
+			{"crispy antelope ears" => 2.50},{"warthog kabab" => 8.25}]
+	end
+
+
+
+
+
+end
