@@ -1,12 +1,16 @@
+require './lib/order.rb'
+require './lib/menu.rb'
 class Customer_Order
 
-	attr_accessor :item, :quantity
+	attr_accessor :this_order, :selection 
 
 	def initialize
+		@this_order = Order.new
+		@selection = WildMenu.new
 	end
 
 	def welcome_customer
-		puts "Welcome to Wild Menu.These are the options"
+		puts "Welcome to #{selection.name}.These are the options"
 	end
 
 	def print_menu(takeaway)
@@ -14,17 +18,42 @@ class Customer_Order
 	end
 
 	def order_food_item
-		puts "What would you like to order?"
-		@item = gets.chomp.downcase
+		puts "What would you like to order? Press return when you have finished chosing items."
+		this_order.item = gets.chomp.downcase
 	end
 
 	def order_food_quantity
 		puts "How many of those would you like?"
-		@quantity = gets.chomp.to_i
+		this_order.quantity = gets.chomp.to_i
 	end
 
 	def enter_payment_amount
+		puts "Your order total is #{@this_order.order_total}"
 		puts "Please enter the payment amount in £"
-		payment_amount = gets.chomp.to_i
+		this_order.payment_amount = gets.chomp.to_f
 	end
+
+	def confirm_payment
+		puts "Payment received."
+	end
+
+	def place_order
+		welcome_customer
+		print_menu(selection)
+		order_food_item
+		while !this_order.item.empty?
+			order_food_quantity
+			this_order.add_items_to_order
+			order_food_item
+		end
+		this_order.calculate_order_total(@selection)
+		enter_payment_amount
+		this_order.verify_payment
+		confirm_payment
+		this_order.texting_service
+	end
+
 end
+
+
+

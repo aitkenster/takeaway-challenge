@@ -1,4 +1,5 @@
 require 'customer_order'
+require 'order'
 
 describe Customer_Order do
 	
@@ -20,7 +21,7 @@ describe Customer_Order do
 
 	it 'takes a customer food order' do 
 		allow(nicola).to receive(:gets).and_return("cheetah burger")
-		expect(nicola).to receive(:puts).with("What would you like to order?")
+		expect(nicola).to receive(:puts).with("What would you like to order? Press return when you have finished chosing items.")
 		nicola.order_food_item
 	end
 
@@ -32,8 +33,14 @@ describe Customer_Order do
 
 	it 'asks the user for payment' do 
 		allow(nicola).to receive(:gets).and_return("1")
+		expect(nicola).to receive(:puts).with("Your order total is 0")
 		expect(nicola).to receive(:puts).with("Please enter the payment amount in £")
 		nicola.enter_payment_amount
+	end
+
+	it 'confirms the payment has been received' do 
+		expect(nicola).to receive(:puts).with("Payment received.")
+		nicola.confirm_payment
 	end
 
 

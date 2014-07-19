@@ -1,35 +1,33 @@
-# require './lib/menu'
+require './lib/menu'
 require 'twilio-ruby'
+require './lib/customer_order'
 class Order
 
-	attr_accessor :order, :order_total, :delivery_message
+	attr_accessor :order, :order_total, :delivery_message, :payment_amount, :item, :quantity
 
 	def initialize
 		@order = []
 		@order_total = 0
 		@delivery_message = ""
+		@payment_amount = 0
+		@item = ""
+		@quantity = 0
 	end
 
-	def place_order(item, quantity)
-		quantity.times {@order << item}
+	def add_items_to_order
+		quantity.times {order << item}
 	end
 
 	def calculate_order_total(menu)
 		@order.each do |item|
 			@order_total += menu.list.fetch(item)
 		end
-
 	end
 
-	def verify_payment(payment_amount)
+	def verify_payment
 		 raise "I'm sorry, you do not seem to have input the correct amount. Please try again" if payment_amount != order_total
-		 	@delivery_message = (Time.now+3600).strftime("Thanks for ordering with Wild Menu. Your order has been processed and will be delivered at %I:%M%p")
-		
-		 	
+		 @delivery_message = (Time.now+3600).strftime("Thanks for ordering with Wild Menu. Your order has been processed and will be delivered at %I:%M%p")
 	end
-
-
-
 
 	def texting_service
 
