@@ -23,7 +23,7 @@ class Order
 
 	def verify_payment(payment_amount)
 		 raise "I'm sorry, you do not seem to have input the correct amount. Please try again" if payment_amount != order_total
-		 	@delivery_message = (Time.now+3600).strftime("Thanks for ordering with WildMenu. Your order has been processed and will be delivered at %I:%M%p")
+		 	@delivery_message = (Time.now+3600).strftime("Thanks for ordering with Wild Menu. Your order has been processed and will be delivered at %I:%M%p")
 		
 		 	
 	end
