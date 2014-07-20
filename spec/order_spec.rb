@@ -8,6 +8,7 @@ describe Order do
 	it 'allows the user to order multiple items' do 
 		nicola.item = "cheetah burger"
 		nicola.quantity = 2
+		nicola.add_items_to_order
 		expect(nicola.order.count).to eq 2
 	end
 
