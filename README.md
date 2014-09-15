@@ -81,16 +81,38 @@ To run takeaway
 ```sh
 cd takeaway-challenge
 bunde install
+irb
+require './lib/customer_order.rb'
+Customer_Order.new.place_order
+
+```
+
+To run inject method
+
+```sh
+cd takeaway-challenge
+irb
+require './lib/inject/inject.rb'
+
+```
+
+To run attr accessor
+
+```sh
+cd takeaway-challenge
+irb
+require './lib/attr_accessor/attribute_accessor_method.rb
 
 ```
 
 ###How to test it
 
 ```sh
-cd XXXXX
+cd takeaway-challenge
 rspec
 ``` 
 
 ###Future Improvements
 
-+
++ I would change the class names of takeaway, as 'Order' and 'Customer Order' aren't clear.
++ Put the inject and attr accessor programs into seperate repositories.
